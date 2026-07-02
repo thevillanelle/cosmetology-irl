@@ -1771,7 +1771,7 @@ const MODE_COLORS = {
   apple:    { accent:'#0071E3', label:'Apple',     swatch:'linear-gradient(135deg,#F5F5F7 50%,#0071E3 50%)' },
 };
 
-let currentMode = localStorage.getItem('pe101_mode') || 'cher';
+let currentMode = localStorage.getItem('cosmo_mode') || 'walker';
 
 function applyMode(mode) {
   const root = document.documentElement;
@@ -1790,7 +1790,7 @@ function applyMode(mode) {
     if (opt) opt.classList.toggle('active', k === mode);
   });
   currentMode = mode;
-  localStorage.setItem('pe101_mode', mode);
+  localStorage.setItem('cosmo_mode', mode);
 }
 
 function setMode(mode, btn) {
@@ -1812,16 +1812,6 @@ document.addEventListener('click', e => {
 
 // Apply saved mode on load
 applyMode(currentMode);
-
-// Init
-initGrader();
-
-
-
-/* ── RUBRIC HIGHLIGHT */
-var _DIM_MAP={application:1,data:2,reliability:3,security:4,operations:5,architecture:6,innersource:7};
-function highlightRubricCards(s){document.querySelectorAll('.score-cell.active').forEach(function(e){e.classList.remove('active');});s.forEach(function(d){var n=_DIM_MAP[d.key];if(!n)return;var c=document.getElementById('rubric-dim-'+n);if(!c)return;var t=c.querySelector('.score-cell.score-'+d.score);if(t)t.classList.add('active');});var f=document.getElementById('rubric-dim-1');if(f)f.scrollIntoView({behavior:'smooth',block:'start'});}
-function printGradingReport(){var h=window._lastReportHTML||'',fl=window._lastReportFiles||'';if(!h){alert('Run the grader first.');return;}var w=window.open('','_blank','width=900,height=700');w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Rubric Report</title><style>body{font-family:-apple-system,sans-serif;font-size:13px;padding:40px;max-width:800px;margin:0 auto}h1{font-size:22px;font-weight:900}.meta{font-size:11px;color:#6e6e73;margin-bottom:24px}.grade-result{border:2px solid #1a1008}.grade-result-hdr{display:flex;justify-content:space-between;padding:10px 14px;background:#fffdf8;border-bottom:2px solid #1a1008;font-weight:800;font-size:12px}.grade-dim{display:flex;gap:12px;padding:10px 14px;border-bottom:1px solid rgba(0,0,0,.1)}.grade-dim-score{font-size:22px;font-weight:900;min-width:28px}.grade-dim-name{font-weight:800;font-size:12px;margin-bottom:4px}.grade-dim-evidence{font-size:11px}.grade-evidence-item{display:flex;gap:6px}.check-pass{color:#1a8f3c;font-weight:800}.check-fail{color:#c0392b;font-weight:800}.grade-total-bar{display:flex;gap:16px;padding:14px;background:#fffdf8;border-top:2px solid #1a1008}.grade-total-num{font-size:32px;font-weight:900}.grade-total-track{height:12px;background:#eee;border:1px solid #ccc;flex:1;margin-top:6px}.grade-total-fill{height:100%;background:#F5C518}@media print{button{display:none}}</style></head><body>');w.document.write('<h1>State Board Prep Checklist</h1><div class="meta">Files: '+fl+' &middot; '+new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})+' &middot; Analyzed in browser</div>');w.document.write(h);w.document.write('<br><button onclick="window.print()" style="padding:8px 20px;background:#1a1008;color:#F5C518;border:none;font-weight:800;font-size:12px;cursor:pointer">Print / Save as PDF</button></body></html>');w.document.close();w.onload=function(){w.print()};}
 
 /* ════════════ GLOSSARY LAYER ════════════ */
 const GLOSSARY = {
@@ -2450,7 +2440,7 @@ function renderStepBody(s){
     '</div></div>'+btnHtml;
 }
   if(s.t==='code')return (s.title?'<div class="lesson-step-title" style="font-size:20px">'+esc(s.title)+'</div>':'')+'<div class="code-block"><div class="code-label">'+esc(s.label||'code')+'</div><pre>'+esc(s.code)+'</pre></div>';
-  if(s.t==='quiz'){var opts=s.opts.map(function(o,i){return '<div class="quiz-opt" onclick="answerQuiz(this,'+i+','+s.correct+')"><div class="quiz-opt-letter">'+String.fromCharCode(65+i)+'</div><div>'+esc(o)+'</div></div>';}).join('');return '<div class="quiz-box"><div class="quiz-q-hdr"><span class="quiz-q-icon">\ud83d\udcdd</span><span class="quiz-q-label">Knowledge Check</span></div><div class="quiz-q-body"><div class="quiz-q-text">'+esc(s.q)+'</div><div class="quiz-opts">'+opts+'</div><div class="quiz-feedback" id="quiz-fb"></div></div></div>';}
+  if(s.t==='quiz'){var opts=s.opts.map(function(o,i){return '<div class="quiz-opt" onclick="answerQuiz(this,'+i+','+s.ans+')"><div class="quiz-opt-letter">'+String.fromCharCode(65+i)+'</div><div>'+esc(o)+'</div></div>';}).join('');return '<div class="quiz-box"><div class="quiz-q-hdr"><span class="quiz-q-icon">\ud83d\udcdd</span><span class="quiz-q-label">Knowledge Check</span></div><div class="quiz-q-body"><div class="quiz-q-text">'+esc(s.q)+'</div><div class="quiz-opts">'+opts+'</div><div class="quiz-feedback" id="quiz-fb"></div></div></div>';}
   if(s.t==='tryit'){window.__tryit=s.chips;var chips=s.chips.map(function(c,i){return '<div class="tryit-chip" onclick="tryitPick(this,'+i+')">'+esc(c.label)+'</div>';}).join('');return '<div class="tryit"><div class="tryit-hdr">Try it</div><div class="tryit-body"><div class="tryit-q">'+esc(s.q)+'</div><div class="tryit-toggle-row">'+chips+'</div><div class="tryit-result" id="tryit-result">Pick one to see what happens.</div></div></div>';}
   return '';
 }
@@ -2461,7 +2451,7 @@ function answerQuiz(el,picked,correct){
   var s=COURSE[LP.mod].lessons[LP.lesson].steps[LP.step];
   var fb=box.querySelector('#quiz-fb'); var right=picked===correct;
   fb.className='quiz-feedback show '+(right?'right':'wrong-fb');
-  fb.innerHTML='<div class="quiz-feedback-title">'+(right?'\u2705 Correct':'\u274c Not quite')+'</div>'+esc(right?s.right:s.wrong);
+  fb.innerHTML='<div class="quiz-feedback-title">'+(right?'\u2705 Correct':'\u274c Not quite')+'</div>'+esc(s.why);
 }
 function tryitPick(el,i){el.parentNode.querySelectorAll('.tryit-chip').forEach(function(c){c.classList.remove('sel');});el.classList.add('sel');document.getElementById('tryit-result').innerHTML=esc(window.__tryit[i].result);}
 function jumpStep(i){LP.step=i;renderStep();}
