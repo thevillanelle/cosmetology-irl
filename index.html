@@ -1004,7 +1004,7 @@ body{
           <span id="mode-label-active">Walker</span> ▾
         </button>
         <div class="mode-menu" id="mode-menu">
-          <button class="mode-option active" id="mode-opt-cher" onclick="setMode('cher',this)">
+          <button class="mode-option active" id="mode-opt-walker" onclick="setMode('walker',this)">
             <span class="mode-swatch" style="background:linear-gradient(135deg,#C9A447 50%,#2C1505 50%)"></span>
             Walker
           </button>
@@ -1763,12 +1763,12 @@ function copyRubricPrompt(btn) {
 
 /* ── CHARACTER MODES ─────────────────────────────── */
 const MODE_COLORS = {
-  cher:     { accent:'#F5C518', label:'Cher',     swatch:'linear-gradient(135deg,#F5C518 50%,#1A1008 50%)' },
+  walker:   { accent:'#C9A447', label:'Walker',   swatch:'linear-gradient(135deg,#C9A447 50%,#2C1505 50%)' },
   cicely:   { accent:'#F7A8C4', label:'Cicely',   swatch:'linear-gradient(135deg,#F7A8C4 50%,#5C1F3A 50%)' },
-  amber:    { accent:'#F4A090', label:'Dorothy',     swatch:'linear-gradient(135deg,#F4A090 50%,#5C1A0A 50%)' },
-  ty:       { accent:'#3A80D2', label:'Iman',        swatch:'linear-gradient(135deg,#A8CCF8 50%,#0A2240 50%)' },
-  baldwin:  { accent:'#C9A447', label:'Grace',   swatch:'linear-gradient(135deg,#C9A447 50%,#111111 50%)' },
-  apple:    { accent:'#0071E3', label:'Apple',     swatch:'linear-gradient(135deg,#F5F5F7 50%,#0071E3 50%)' },
+  dorothy:  { accent:'#F4A090', label:'Dorothy',  swatch:'linear-gradient(135deg,#F4A090 50%,#5C1A0A 50%)' },
+  iman:     { accent:'#9B75D0', label:'Iman',     swatch:'linear-gradient(135deg,#9B75D0 50%,#1A0835 50%)' },
+  baldwin:  { accent:'#C9A447', label:'Grace',    swatch:'linear-gradient(135deg,#C9A447 50%,#111111 50%)' },
+  apple:    { accent:'#0071E3', label:'Apple',    swatch:'linear-gradient(135deg,#F5F5F7 50%,#0071E3 50%)' },
 };
 
 let currentMode = localStorage.getItem('cosmo_mode') || 'walker';
@@ -1777,7 +1777,7 @@ function applyMode(mode) {
   const root = document.documentElement;
   // Remove all mode attrs
   root.removeAttribute('data-mode');
-  if (mode !== 'cher') root.setAttribute('data-mode', mode);
+  if (mode !== 'walker') root.setAttribute('data-mode', mode);
   // Update button
   const m = MODE_COLORS[mode];
   const sw = document.getElementById('mode-swatch-active');
