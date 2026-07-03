@@ -2435,7 +2435,7 @@ function renderHomeProgress(){
       '</div>'+
       '<div style="flex:1;min-width:200px">'+
         '<div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:6px"><span>'+s.lessonsDone+' of '+s.lessonsTotal+' lessons</span><span>'+pct+'%</span></div>'+
-        '<div style="height:14px;background:var(--cream);border:2px solid var(--border);overflow:hidden"><div style="height:100%;width:'+pct+'%;background:repeating-linear-gradient(45deg,var(--yellow),var(--yellow) 8px,var(--yellow-mid) 8px,var(--yellow-mid) 16px);transition:width .6s"></div></div>'+
+        '<div style="height:14px;background:var(--cream);border:2px solid var(--border);overflow:hidden"><div style="height:100%;width:'+pct+'%;background:var(--yellow);transition:width .6s"></div></div>'+
         (s.modsDone===s.modsTotal?'<div style="font-size:12px;font-weight:800;color:var(--pink-dark);margin-top:8px">🏆 Course complete. As if you were ever clueless.</div>':'')+
       '</div>'+
     '</div>';
